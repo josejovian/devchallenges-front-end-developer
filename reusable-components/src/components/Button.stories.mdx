@@ -1,0 +1,243 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+
+import { MdLocalGroceryStore } from "react-icons/md";
+
+import Button from "./Button";
+
+export const Template = (args) => {
+	const params = { ...args, children: undefined };
+	return <Button {...params}>{args.children}</Button>;
+};
+
+<Meta title="Button" component={Button} />  
+
+# Button  
+
+Reusable button component.
+
+## Button Variants
+
+### Default Button  
+
+Default buttons are solid buttons.
+
+<Canvas>
+	<Story
+		name="Solid Default Button"
+		args={{
+			color: "default",
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Solid Primary Button"
+		args={{
+			color: "primary",
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Solid Secondary Button"
+		args={{
+			color: "secondary",
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Solid Danger Button"
+		args={{
+			color: "danger",
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>  
+
+### Outline Button
+
+Buttons with colored outlines. Change the `color` property to change the button's outline.
+
+<Canvas>
+	<Story
+		name="Outline Default Button"
+		args={{
+			color: "default",
+			variant: "outline"
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Outline Primary Button"
+		args={{
+			color: "primary",
+			variant: "outline"
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Outline Secondary Button"
+		args={{
+			color: "secondary",
+			variant: "outline"
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Outline Danger Button"
+		args={{
+			color: "danger",
+			variant: "outline"
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>  
+
+### Text Button
+
+Buttons that appear as a simple text.
+
+<Canvas>
+	<Story
+		name="Text Default Button"
+		args={{
+			color: "default",
+			variant: "text"
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Text Primary Button"
+		args={{
+			color: "primary",
+			variant: "text"
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Text Secondary Button"
+		args={{
+			color: "secondary",
+			variant: "text"
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Text Danger Button"
+		args={{
+			color: "danger",
+			variant: "text"
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>  
+
+## Miscellaneous
+
+### Button Sizes
+
+Three different sizes are available for buttons: `sm`, `md` and `lg`.
+
+<Canvas>
+	<Story
+		name="Small Button"
+		args={{
+			color: "default",
+			size: "sm",
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Medium Button"
+		args={{
+			color: "default",
+			size: "md",
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Large Button"
+		args={{
+			color: "default",
+			size: "lg",
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas> 
+
+### Buttons with Icons
+
+To add icons, you have to import an icon component and pass it to the button component.
+
+<Canvas>
+	<Story
+		name="Start-Icon Button"
+		args={{
+			color: "default",
+			startIcon: <MdLocalGroceryStore />,
+			children: "Purchase",
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>  
+
+If needed, you can use `endIcon` to make it so the button appears in the end of the button.
+
+<Canvas>
+	<Story
+		name="End-Icon Button"
+		args={{
+			color: "default",
+			endIcon: <MdLocalGroceryStore />,
+			children: "Purchase",
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>  
+
+### Disable Shadows
+
+Use the `disableShadow` property to disable shadows on buttons.
+
+<Canvas>
+	<Story
+		name="Shadow-Disabled Button"
+		args={{
+			color: "default",
+			disableShadow: true,
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>  
+
+### Disabled Button
+
+Regardless of the `color` property of a button, it will become gray when disabled.
+
+<Canvas>
+	<Story
+		name="Disabled Button"
+		args={{
+			color: "default",
+			disabled: true,
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>  

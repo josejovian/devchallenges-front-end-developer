@@ -1,0 +1,100 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs";
+
+import { MdLocalGroceryStore } from "react-icons/md";
+
+import Input from "./Input";
+
+export const Template = (args) => {
+	return <Input {...args} />;
+};
+
+<Meta title="Input" component={Input} />
+
+# Input
+
+Reusable input component.
+
+## Input States
+
+Some states for the input boxes.
+
+<Canvas>
+	<Story name="Default Input" args={{}}>
+		{Template.bind({})}
+	</Story>
+	<Story name="Default Error Input" args={{ error: true }}>
+		{Template.bind({})}
+	</Story>
+	<Story name="Default Disabled Input" args={{ disabled: true }}>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Input Sizes
+
+There are two sizes for input boxes, `sm` and `md` (default).
+
+<Canvas>
+	<Story name="Small Input" args={{ size: "sm" }}>
+		{Template.bind({})}
+	</Story>
+	<Story name="Medium Input" args={{ size: "md" }}>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Input Addons
+
+### Helper Text
+
+You can add helper text to the input boxes. To give value to the input boxes, use the `value` property.
+
+<Canvas>
+	<Story
+		name="Helper Text Input"
+		args={{ value: "New Value!", helperText: "Some text" }}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Icons
+
+You can add icons to the input boxes, using the `startIcon` and `endIcon` properties.
+
+<Canvas>
+	<Story
+		name="Start-Icon Input"
+		args={{ startIcon: <MdLocalGroceryStore /> }}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+<Canvas>
+	<Story name="End-Icon Input" args={{ endIcon: <MdLocalGroceryStore /> }}>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+## Miscellaneous
+
+### Full Width
+
+Use the `fullWidth` property to force the input box to take on the maximum width possible.
+
+<Canvas>
+	<Story name="Full-Width Input" args={{ fullWidth: true }}>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+### Multiline
+
+Use the `multiline` and `rows` property to use textarea instead of a standard input box.
+
+<Canvas>
+	<Story name="Multi-Line Input" args={{ multiline: true, rows: 4 }}>
+		{Template.bind({})}
+	</Story>
+</Canvas>
