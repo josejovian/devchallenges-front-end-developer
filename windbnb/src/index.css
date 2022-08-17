@@ -1,0 +1,42 @@
+@layer base {
+	a {
+		@apply underline;
+	}
+}
+@tailwind base;
+@layer components {
+	input {
+		@apply px-4 py-4 rounded-lg;
+	}
+	
+	#drawer input {
+		@apply w-full pt-6 pb-2;
+	}
+
+	label {
+		@apply absolute top-2 pl-4 text-xs font-bold
+	}
+
+	.quantity-control button {
+		@apply px-2 border border-gray-700 text-gray-700 rounded-md;
+	}
+}
+@tailwind components;
+@layer utilities {
+	
+}
+@tailwind utilities;
+
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+		"Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}
