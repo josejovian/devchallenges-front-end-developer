@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdLocationPin, MdSearch } from "react-icons/md";
 import { Guest, Location, NavProps } from "../App";
 
@@ -75,7 +75,7 @@ const Nav: React.FC<NavProps> = ({
 	];
 
 	useEffect(() => {
-		function updateTop() {
+		function updateTop(): void {
 			const y: number = window?.scrollY;
 			setTop(y === 0);
 		}
@@ -221,7 +221,7 @@ const Nav: React.FC<NavProps> = ({
 									const invalidType =
 										name !== "child" && name !== "adult";
 
-									function updateValue(sign: number) {
+									function updateValue(sign: number): void {
 										if (invalidType) return;
 
 										setFilter((prevFilter: Filter) => {

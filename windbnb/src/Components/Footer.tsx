@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import React from "react";
-import Stay, { StayInterface, stays } from "./Stays";
 
 const Footer: React.FC = () => {
 	return (
