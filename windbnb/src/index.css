@@ -9,8 +9,16 @@
 		@apply px-4 py-4 rounded-lg;
 	}
 	
-	#drawer input {
+	#drawer-view input {
 		@apply w-full pt-6 pb-2;
+	}
+
+	#drawer-view > article {
+		@apply relative flex-grow basis-1 lg:basis-5/12;
+	}
+
+	#drawer-controls > article {
+		@apply flex-grow basis-5/12 my-4 lg:my-0;
 	}
 
 	label {
@@ -19,6 +27,10 @@
 
 	.quantity-control button {
 		@apply px-2 border border-gray-700 text-gray-700 rounded-md;
+	}
+
+	.px-responsive {
+		@apply px-8 sm:px-16 lg:px-32;
 	}
 }
 @tailwind components;

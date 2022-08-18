@@ -14,6 +14,43 @@ interface Filter {
 	guest: Guest;
 }
 
+const guestTypes: GuestType[] = [
+	{
+		id: 0,
+		name: "Adult",
+		desc: "Ages 13 or above",
+	},
+	{
+		id: 1,
+		name: "Child",
+		desc: "Ages 2 - 12",
+	},
+];
+
+const stockLocations: Location[] = [
+	{
+		city: "Helsinki",
+		country: "Finland",
+	},
+	{
+		city: "Turku",
+		country: "Finland",
+	},
+	{
+		city: "Oulu",
+		country: "Finland",
+	},
+	{
+		city: "Vaasa",
+		country: "Finland",
+	},
+];
+
+const searchButtonStyle: string = clsx(
+	"p-4 items-center gap-4 w-32",
+	"bg-red-600 text-white rounded-lg"
+);
+
 const Nav: React.FC<NavProps> = ({
 	location,
 	setLocation,
@@ -22,6 +59,7 @@ const Nav: React.FC<NavProps> = ({
 }) => {
 	const [top, setTop] = useState(true);
 	const [open, setOpen] = useState(false);
+	const [active, setActive] = useState(0);
 	const [filter, setFilter] = useState({
 		location: {
 			city: "",
@@ -42,38 +80,6 @@ const Nav: React.FC<NavProps> = ({
 			? `${filter.guest.adult} adults, ${filter.guest.child} children`
 			: "";
 
-	const guestTypes: GuestType[] = [
-		{
-			id: 0,
-			name: "Adult",
-			desc: "Ages 13 or above",
-		},
-		{
-			id: 1,
-			name: "Child",
-			desc: "Ages 2 - 12",
-		},
-	];
-
-	const stockLocations: Location[] = [
-		{
-			city: "Helsinki",
-			country: "Finland",
-		},
-		{
-			city: "Turku",
-			country: "Finland",
-		},
-		{
-			city: "Oulu",
-			country: "Finland",
-		},
-		{
-			city: "Vaasa",
-			country: "Finland",
-		},
-	];
-
 	useEffect(() => {
 		function updateTop(): void {
 			const y: number = window?.scrollY;
@@ -87,18 +93,47 @@ const Nav: React.FC<NavProps> = ({
 		};
 	}, []);
 
+	function applySearch(): void {
+		const currentLocation: Location = filter.location,
+			currentGuest: Guest = filter.guest;
+		setLocation(currentLocation);
+		setGuest(currentGuest);
+	}
+
+	function resetLocation(): void {
+		setActive(0);
+		setFilter((prevFilter: Filter) => ({
+			...prevFilter,
+			location: {
+				city: "",
+				country: "",
+			},
+		}));
+	}
+
+	function resetGuest(): void {
+		setActive(1);
+		setFilter((prevFilter: Filter) => ({
+			...prevFilter,
+			guest: {
+				adult: 0,
+				child: 0,
+			},
+		}));
+	}
+
 	return (
 		<>
 			<nav
 				className={clsx(
-					"fixed top-0 w-screen",
-					"flex justify-between px-32 py-8",
+					"fixed top-0 w-screen h-40 lg:h-auto",
+					"flex flex-col lg:flex-row lg:justify-between px-responsive py-8 gap-4",
 					"bg-white z-10",
 					!top && "border-b-2 border-gray-200"
 				)}
 			>
 				<img
-					className="h-min self-center"
+					className="h-auto self-start lg:self-center"
 					src="./logo.png"
 					alt="logo"
 				/>
@@ -107,18 +142,20 @@ const Nav: React.FC<NavProps> = ({
 					onClick={() => setOpen(!open)}
 				>
 					<input
+						className="basis-5/12 min-w-0	"
 						type="text"
 						value={locationText}
 						placeholder="Choose Location"
 						readOnly
 					/>
 					<input
+						className="basis-5/12 min-w-0	"
 						type="text"
 						placeholder="Add Guests"
 						value={guestText}
 						readOnly
 					/>
-					<button className="p-4">
+					<button className="p-4 basis-2/12">
 						<MdSearch className="text-red-600" />
 					</button>
 				</section>
@@ -127,15 +164,18 @@ const Nav: React.FC<NavProps> = ({
 				<>
 					<section
 						className={clsx(
-							"fixed top-0 w-screen h-auto px-32 py-16",
+							"fixed top-0 w-screen h-auto px-responsive py-8 lg:py-16",
 							"bg-white z-30"
 						)}
 					>
+						<p className="mb-4">Edit your search</p>
 						<section
-							id="drawer"
-							className={clsx("flex shadow-md rounded-lg")}
+							id="drawer-view"
+							className={clsx(
+								"flex flex-col lg:flex-row shadow-md rounded-lg"
+							)}
 						>
-							<section className="relative flex-grow basis-5/12">
+							<article>
 								<label>LOCATION</label>
 								<input
 									className="w-full pt-8 pb-2"
@@ -143,55 +183,45 @@ const Nav: React.FC<NavProps> = ({
 									defaultValue="Helnski, Finland"
 									placeholder="Choose Location"
 									value={locationText}
-									onClick={() => {
-										setFilter((prevFilter: Filter) => ({
-											...prevFilter,
-											location: {
-												city: "",
-												country: "",
-											},
-										}));
-									}}
+									onClick={() => resetLocation()}
 									readOnly
 								/>
-							</section>
-							<section className="relative flex-grow basis-5/12">
+							</article>
+							<article
+								className={clsx(
+									"border-t border-gray-100 lg:border-0"
+								)}
+							>
 								<label>GUESTS</label>
 								<input
 									className="w-full pt-8 pb-2"
 									type="text"
 									placeholder="Add Guests"
 									value={guestText}
-									onClick={() => {
-										setFilter((prevFilter: Filter) => ({
-											...prevFilter,
-											guest: {
-												adult: 0,
-												child: 0,
-											},
-										}));
-									}}
+									onClick={() => resetGuest()}
 									readOnly
 								/>
-							</section>
+							</article>
 							<button
 								className={clsx(
-									"p-4 flex items-center gap-4 w-32 basis-1/12",
-									"bg-red-600 text-white rounded-lg"
+									searchButtonStyle,
+									"hidden lg:flex lg:basis-1/12"
 								)}
-								onClick={() => {
-									const currentLocation = filter.location,
-										currentGuest = filter.guest;
-									setLocation(currentLocation);
-									setGuest(currentGuest);
-								}}
+								onClick={() => applySearch()}
 							>
 								<MdSearch />
 								<span>Search</span>
 							</button>
 						</section>
-						<section className={"flex mt-3"}>
-							<div className="flex-grow basis-5/12">
+						<section
+							id="drawer-controls"
+							className={"flex flex-col md:flex-row mt-3"}
+						>
+							<article
+								className={clsx(
+									active !== 0 && "hidden lg:flex lg:flex-col"
+								)}
+							>
 								{stockLocations.map((loc) => (
 									<div
 										className={clsx(
@@ -212,8 +242,13 @@ const Nav: React.FC<NavProps> = ({
 										</span>
 									</div>
 								))}
-							</div>
-							<div className="flex flex-col flex-grow basis-5/12 gap-4 ml-8">
+							</article>
+							<article
+								className={clsx(
+									"flex flex-col gap-4 ml-8",
+									active !== 1 && "hidden lg:flex"
+								)}
+							>
 								{guestTypes.map((currentGuest: GuestType) => {
 									const name =
 										currentGuest.name.toLowerCase();
@@ -271,9 +306,19 @@ const Nav: React.FC<NavProps> = ({
 										</div>
 									);
 								})}
-							</div>
+							</article>
 							<div className="w-32 basis-1/12"></div>
 						</section>
+						<button
+							className={clsx(
+								searchButtonStyle,
+								"flex lg:hidden mt-4 mx-auto lg:basis-1/12"
+							)}
+							onClick={() => applySearch()}
+						>
+							<MdSearch />
+							<span>Search</span>
+						</button>
 					</section>
 					<div
 						className={clsx(

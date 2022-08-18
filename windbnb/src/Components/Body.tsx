@@ -25,7 +25,7 @@ const Body: React.FC<BodyProps> = ({ location, guest }) => {
 			<main
 				id="body"
 				className={clsx(
-					"mt-32 px-32",
+					"mt-40 lg:mt-32 px-responsive",
 					"grid grid-flow-row grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16"
 				)}
 			>
