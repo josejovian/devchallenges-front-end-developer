@@ -1,0 +1,34 @@
+@layer base {
+	* {
+		@apply text-white;
+	}
+}
+@tailwind base;
+@layer components {
+	.w-side {
+		width: 24rem;
+	}
+	.w-inv-side {
+		width: calc(100% - 24rem);
+	}
+	.w-exc-scroll {
+		width: 100%;
+	}
+	.h-force {
+		min-height: 100vh;
+	}
+	#today-weather-background {
+		background-size: 100% auto;
+		background-image: url('../public/Cloud-background.png');
+		background-repeat: no-repeat;
+		opacity: 20%;
+	}
+	.ratio-special {
+		aspect-ratio: 171 / 94;
+	}
+}
+@tailwind components;
+@layer utilities {
+	
+}
+@tailwind utilities
