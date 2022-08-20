@@ -3,7 +3,7 @@ import axios, { AxiosInstance } from "axios";
 import { Job } from "../types/Job";
 
 export const api: AxiosInstance = axios.create({
-	baseURL: "http://localhost:3000/api",
+	baseURL: "https://devchallenges-front-end-developer-jyteeu8hb-josejovian.vercel.app/api",
 });
 
 export async function getListing(
