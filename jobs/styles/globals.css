@@ -1,0 +1,69 @@
+@layer base {
+	html,
+	body {
+		padding: 0;
+		margin: 0;
+		font-family: Segoe UI;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	input {
+		min-width: 0px;
+		width: auto;
+	}
+
+	pre {
+		font-family: Segoe UI;
+		white-space: pre-wrap; /* css-3 */
+		white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+		white-space: -pre-wrap; /* Opera 4-6 */
+		white-space: -o-pre-wrap; /* Opera 7 */
+		word-wrap: break-word; /* Internet Explorer 5.5+ */
+	}
+}
+@tailwind base;
+@layer components {
+	.search {
+		background-image: url("../public/backgroundImg.png");
+		background-size: auto 100%;
+	}
+	.search-lg {
+		aspect-ratio: 9 / 1;
+	}
+	.search-sm {
+		aspect-ratio: 4 / 1;
+	}
+	.job-thumbnail {
+		height: 100%;
+		width: auto;
+		aspect-ratio: 1 / 1;
+	}
+	.job-thumbnail img {
+		height: 100%;
+		width: 100%;
+	}
+	.w-side {
+		width: 12rem;
+	}
+	.w-exc-side {
+		width: calc(100% - 12rem);
+	}
+	.job-schedule {
+		@apply w-fit px-2 border-zinc-900 border rounded-sm;
+	}
+	.job-detail {
+		@apply flex items-center gap-2 text-gray-600;
+	}
+}
+@tailwind components;
+@layer utilities {
+}
+@tailwind utilities;
